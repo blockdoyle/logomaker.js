@@ -2,6 +2,19 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
+// write file function
+function writeToFile(fileName, data) {
+    // Create output directory if it doesn't exist
+    if (!fs.existsSync("./output")) {
+        fs.mkdirSync("./output");
+    }
+    // actual write file function
+    fs.writeFile(`./output/${fileName}`, data, (err) => {
+        if (err) throw err;
+        console.log(`${fileName} written successfully.`);
+    });
+}
+
 // questions for inquirer
 const questions = [
     {
