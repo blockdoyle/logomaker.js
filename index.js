@@ -15,17 +15,19 @@ function writeToFile(fileName, data) {
   });
 }
 
-// // make svg data
-// function makeSVG(data) {
-
-// }
-
-// Shape class
 class Shape {
-  constructor(shape, colour, title) {
-    this.shape = shape;
-    this.color = colour;
+  constructor(colour, title) {
+    this.colour = colour;
     this.title = title;
+  }
+  render() {
+    let svg = `
+      <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="300" height="200" fill="${this.colour}" />
+        <text x="50%" y="50%" text-anchor="middle" fill="white" font-size="48">${this.title}</text>
+      </svg>
+    `;
+    return svg;
   }
 }
 
