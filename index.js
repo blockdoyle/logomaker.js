@@ -16,9 +16,10 @@ function writeToFile(fileName, data) {
 }
 
 class Shape {
-  constructor(colour, title) {
+  constructor(colour, title, titlecolour) {
     this.colour = colour;
     this.title = title;
+    this.titlecolour = titlecolour;
   }
   render() {
     let svg = `
