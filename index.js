@@ -48,7 +48,7 @@ class Rectangle extends Shape {
   render() {
     let svg = `
       <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
-        <rect width="300" height="200" fill="${this.colour}" />
+        <rect width="150" height="150" x="75" fill="${this.colour}" />
         <text x="50%" y="50%" text-anchor="middle" fill="white" font-size="60">${this.title}</text>
       </svg>
     `;
@@ -100,11 +100,37 @@ const questions = [
       return "Please enter only 3 characters.";
     },
   },
+  {
+    name: "titlecolour",
+    type: "input",
+    message:
+      "Pick a colour for the title. (Type the name of the colour, or enter the HEX value, starting with '#'",
+    validate: function (value) {
+      if (value.length > 0) {
+        return true;
+      }
+
+      return "Please enter a value.";
+    },
+  }
 ];
 
 function init() {
   inquirer.prompt(questions).then((answers) => {
-    console.log(answers);
+    switch(answers.shape) {
+      case "Circle":
+        var shape = new Circle(answers.colour, answers.title, answers.titlecolour);
+        writeToFile('logo.svg', shape.render());
+        break;
+      case "Triangle":
+        var shape = new Triangle(answers.colour, answers.title, answers.titlecolour);
+        writeToFile('logo.svg', shape.render());
+        break;
+      case "Square":
+        var shape = new Rectangle(answers.colour, answers.title, answers.titlecolour);
+        writeToFile('logo.svg', shape.render());
+        break;
+    }
   });
 }
 
