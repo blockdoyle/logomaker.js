@@ -17,16 +17,16 @@ function writeToFile(fileName, data) {
 }
 
 class Shape {
-  constructor(colour, title, titlecolour) {
+  constructor(colour, title, titleColour) {
     this.colour = colour;
     this.title = title;
-    this.titlecolour = titlecolour;
+    this.titleColour = titleColour;
   }
   render() {
     let svg = `
       <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
         <rect width="300" height="200" fill="${this.colour}" />
-        <text x="50%" y="50%" text-anchor="middle" fill="white" font-size="60">${this.title}</text>
+        <text x="50%" y="50%" text-anchor="middle" fill="${this.titleColour}" font-size="60">${this.title}</text>
       </svg>
     `;
     return svg;
@@ -35,10 +35,11 @@ class Shape {
 
 class Circle extends Shape {
   render() {
+    // console.log(this.colour);
     let svg = `
       <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
         <circle cx="150" cy="100" r="80" fill="${this.colour}" />
-        <text x="150" y="125" text-anchor="middle" fill="white" font-size="60">${this.title}</text>
+        <text x="150" y="125" text-anchor="middle" fill="${this.titleColour}" font-size="60">${this.title}</text>
       </svg>
     `;
     return svg;
@@ -47,14 +48,10 @@ class Circle extends Shape {
 
 class Rectangle extends Shape {
   render() {
-    if (this.colour.split('#')[0] === '#') {
-      let name = ntc.name(this.colour)[1];
-      this.colour = name;
-    }
     let svg = `
       <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
         <rect width="150" height="150" x="75" fill="${this.colour}" />
-        <text x="50%" y="50%" text-anchor="middle" fill="white" font-size="60">${this.title}</text>
+        <text x="50%" y="50%" text-anchor="middle" fill="${this.titleColour}" font-size="60">${this.title}</text>
       </svg>
     `;
     return svg;
@@ -66,7 +63,7 @@ class Triangle extends Shape {
     let svg = `
       <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
         <polygon points="150,0 25,180 275,180" fill="${this.colour}" />
-        <text x="150" y="125" text-anchor="middle" fill="white" font-size="60">${this.title}</text>
+        <text x="150" y="125" text-anchor="middle" fill="${this.titleColour}" font-size="60">${this.title}</text>
       </svg>`
     return svg;
   }
@@ -106,7 +103,7 @@ const questions = [
     },
   },
   {
-    name: "titlecolour",
+    name: "titleColour",
     type: "input",
     message:
       "Pick a colour for the title. (Type the name of the colour, or enter the HEX value, starting with '#'",
@@ -122,21 +119,18 @@ const questions = [
 
 function init() {
   inquirer.prompt(questions).then((answers) => {
-    // Create colour and titlecolour strings
-    
-    
     // Craete the shape based on the user's input
     switch(answers.shape) {
       case "Circle":
-        var shape = new Circle(answers.colour, answers.title, answers.titlecolour);
+        var shape = new Circle(answers.colour, answers.title, answers.titleColour);
         writeToFile('logo.svg', shape.render());
         break;
       case "Triangle":
-        var shape = new Triangle(answers.colour, answers.title, answers.titlecolour);
+        var shape = new Triangle(answers.colour, answers.title, answers.titleColour);
         writeToFile('logo.svg', shape.render());
         break;
       case "Square":
-        var shape = new Rectangle(answers.colour, answers.title, answers.titlecolour);
+        var shape = new Rectangle(answers.colour, answers.title, answers.titleColour);
         writeToFile('logo.svg', shape.render());
         break;
     }
