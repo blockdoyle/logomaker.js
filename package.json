@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@yatiac/name-that-color": "^1.1.0",
     "inquirer": "^8.2.4"
   }
 }

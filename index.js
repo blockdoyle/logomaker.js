@@ -1,7 +1,6 @@
 // module imports
 const inquirer = require("inquirer");
 const fs = require("fs");
-const ntc = require('@yatiac/name-that-color');
 
 // write file function
 function writeToFile(fileName, data) {
@@ -64,7 +63,7 @@ class Triangle extends Shape {
       <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
         <polygon points="150,0 25,180 275,180" fill="${this.colour}" />
         <text x="150" y="125" text-anchor="middle" fill="${this.titleColour}" font-size="60">${this.title}</text>
-      </svg>`
+      </svg>`;
     return svg;
   }
 }
@@ -114,24 +113,36 @@ const questions = [
 
       return "Please enter a value.";
     },
-  }
+  },
 ];
 
 function init() {
   inquirer.prompt(questions).then((answers) => {
     // Craete the shape based on the user's input
-    switch(answers.shape) {
+    switch (answers.shape) {
       case "Circle":
-        var shape = new Circle(answers.colour, answers.title, answers.titleColour);
-        writeToFile('logo.svg', shape.render());
+        var shape = new Circle(
+          answers.colour,
+          answers.title,
+          answers.titleColour
+        );
+        writeToFile("logo.svg", shape.render());
         break;
       case "Triangle":
-        var shape = new Triangle(answers.colour, answers.title, answers.titleColour);
-        writeToFile('logo.svg', shape.render());
+        var shape = new Triangle(
+          answers.colour,
+          answers.title,
+          answers.titleColour
+        );
+        writeToFile("logo.svg", shape.render());
         break;
       case "Square":
-        var shape = new Rectangle(answers.colour, answers.title, answers.titleColour);
-        writeToFile('logo.svg', shape.render());
+        var shape = new Rectangle(
+          answers.colour,
+          answers.title,
+          answers.titleColour
+        );
+        writeToFile("logo.svg", shape.render());
         break;
     }
   });
