@@ -1,6 +1,7 @@
 // module imports
 const inquirer = require("inquirer");
 const fs = require("fs");
+const ntc = require('@yatiac/name-that-color');
 
 // write file function
 function writeToFile(fileName, data) {
@@ -46,6 +47,10 @@ class Circle extends Shape {
 
 class Rectangle extends Shape {
   render() {
+    if (this.colour.split('#')[0] === '#') {
+      let name = ntc.name(this.colour)[1];
+      this.colour = name;
+    }
     let svg = `
       <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
         <rect width="150" height="150" x="75" fill="${this.colour}" />
@@ -117,6 +122,10 @@ const questions = [
 
 function init() {
   inquirer.prompt(questions).then((answers) => {
+    // Create colour and titlecolour strings
+    
+    
+    // Craete the shape based on the user's input
     switch(answers.shape) {
       case "Circle":
         var shape = new Circle(answers.colour, answers.title, answers.titlecolour);
